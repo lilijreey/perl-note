@@ -1,1 +1,55 @@
 个人学习perl 的笔记
+
+EE 内置类型
++. 数字:
+          perl 中所有的数字都用浮点数实现(double)
+
++. 字符串: 
+           perl中的字符串不已nul来表示一个string的结尾，而是使用长度，
+           这样perl的string就可以处理二进制数据
+
+
+EE undef 特殊值
+  未初始化值
+  1. 是一种独立类型的标量
+    没有赋值的变量，默认值为undef, 变量的初始值都是特殊的undef
+    undef 最为数字就是0，作为string就是空字符串
+   2. undef == undef 但是这样比较会产生警告
+    
+EE defined 函数
+  用来判断一个变量的值是否为undef
+  如果变量值为undef defined 函数返回假
+
+
+EE shift
+my $file = shift; #提取argv 一次一个
+print "arg1",  $file;
+
+EE <>  钻石操作符，从一个文件句柄中读取一行文本
+       没有挂起, 默认的文件句柄时STDIN
+      e.g.my $line = <$file>;
+       <> == <STDIN>
+       <> 的返回值， <> 不去分异常和EOF情况 都返回undef 
+
+EE $_
+    默认的全局变量
+
+EE chomp() 
+   去除一行文本的结尾终止符（如果有的话)
+
+EE 文件系统
+ 
+
+EE STDIN， STDOUT， STDERR
+   每一个perl程序默认打开这三个文件句柄
+
+EE EOF 检查文件结尾
+
+
+EE perl 中的 erron
+    特殊变量 $! 用于存放最后一次错误的消息 
+    没有错误$!为空
+
+EE printf 
+   ??
+
