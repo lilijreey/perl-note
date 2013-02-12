@@ -42,8 +42,16 @@ EE 文件系统
 
 EE STDIN， STDOUT， STDERR
    每一个perl程序默认打开这三个文件句柄
+   有stdio的缓冲
+
+EE 自动刷新
+  autoflush
+  将特殊变量$| 设为true 
+  影响有select（）选定的fd
 
 EE EOF 检查文件结尾
+  bool eof(fd)
+  检测fd是否读入EOF
 
 
 EE perl 中的 erron
@@ -53,3 +61,47 @@ EE perl 中的 erron
 EE printf 
    ??
 
+EE 传递和储存文件句柄
+  使用typeglob
+  typeglob reference
+  将一个df转换为一个glob，在其名字前添加*
+    $fh=*FD;
+  将一个df转换为一个glob reference，在其名字前添加\*
+    $fh=\*FD;
+
+EE 检查是否包含一个有效df
+  fileno(DF)
+ 返回文件描述符(int),  没有返回undef
+
+EE binmode
+
+EE refence 引用
+  使用\来创建引用
+ e.g. $a='hello'
+      $ar = \$a;
+
+EE error
+  use Errno qw(: POSIX)
+
+EE open file 
+ e.g.
+  $isok = open(FD, "filename")
+  $isok = open(FD, "<",  "filename")
+ mode
+  < read
+  > write
+  >> append
+  +> read/write 截断
+  <+ read/write 不截断
+
+ 如果没有如何模式，默认只读
+
+EE sysopen 
+   C like
+
+EE close
+
+OO I/O
+EE IO::Handle
+
+EE IO::File

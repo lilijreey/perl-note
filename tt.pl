@@ -37,6 +37,7 @@ use warnings;
 #}
 
 #EE undef
+#print ok
 if (undef == undef) {
    print 'ok';
 } else  {
