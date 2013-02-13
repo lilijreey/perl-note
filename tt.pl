@@ -38,8 +38,28 @@ use warnings;
 
 #EE undef
 #print ok
-if (undef == undef) {
-   print 'ok';
-} else  {
-  print  '!=';
+#if (undef == undef) {
+#   print 'ok';
+#} else  {
+#  print  '!=';
+#}
+
+# EE fork
+#print "PID=$$\n";
+#my $cpid = fork();
+#if ($cpid > 0) {
+#	sleep(1);
+#	print "parent process $$\n";
+#} else {
+#	print "client process $$\n";
+#}
+
+#my $l=`ls`;
+#print "$l\n";
+
+#while (my ($k, $v) = each %ENV) {
+#	print "$k => $v\n";
+#}
+while (my @kv = each %ENV) {
+	print "@kv[0] => @kv[1]\n"
 }

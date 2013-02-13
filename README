@@ -1,5 +1,16 @@
 个人学习perl 的笔记
 
+EE 特殊变量
++. $! 错误说明
++. $$  当前进程pid, 只读变量
++. $"  分割符 默认为空格
++. $_ 默认变量
+
+EE 管道 运行外部程序
+   和bash一样可以使用反引号执行外部命令
+   反引号中可以插入标量
+   e.g. $ls=`ls -l`;
+
 EE 内置类型
 +. 数字:
           perl 中所有的数字都用浮点数实现(double)
@@ -8,6 +19,15 @@ EE 内置类型
            perl中的字符串不已nul来表示一个string的结尾，而是使用长度，
            这样perl的string就可以处理二进制数据
 
++. array:
+    同名的标量和array，是不同的
+
++. hash:
+   key 永远都是字符串
+   访问hash元素 $hash{$key}
+   使用%来指定整个hash table 
+     e.g. %hh = ('foo', 3, 'bar' 4);
+   hash 和 array之间可自动转换
 
 EE undef 特殊值
   未初始化值
@@ -46,8 +66,13 @@ EE STDIN， STDOUT， STDERR
 
 EE 自动刷新
   autoflush
-  将特殊变量$| 设为true 
+  将特殊变量$| 设为true 1
   影响有select（）选定的fd
+
+EE select
+  把一个fd和另一个fd管理
+     select(fd1)
+     select (fd2)
 
 EE EOF 检查文件结尾
   bool eof(fd)
@@ -105,3 +130,105 @@ OO I/O
 EE IO::Handle
 
 EE IO::File
+
+EE signal
+  SIG 数组存放各个信号的处理函数
+   $SIG{PIPE} = 'IGNORE';
+
+EE 最后一个索引值
+  $#name e.g. $#arr;
+  也可以使用负数来索引
+  +--+--+--+--+--+
+  |0 |1 |2 |3 |4 |
+  +--+--+--+--+--+
+   -5 -4 -3 -2 -1
+
+EE 列表直接俩
+  使用括号围住，使用逗号分割元素
+   (1, 2, 3)
+   (1..100);
+   可以使用=>来代替逗号，一般用于构造hash
+   e.g %hh = ('ee' => 1,
+              'bb' => 2)
+   在使用 => 时 key 可以省略引号
+   e.g %hh = (ee => 1,
+              bb => 2)
+
+EE 建立纯string类型的列表
+   使用 qw
+ qw(hello world) == ("hello",  "world)
+
+EE pop pus
+  在数组尾部添加删除 like push_back and pop_back in C++
+  e.g. pop(@arry)
+  如果arry是空的，则pop什么都不做，返回undef
+  
+  push(@arry,  1)
+
+EE shift unshitf
+  在数组头部添加删除 like push_fornt and pop_fornt in C++
+  shift (pop)
+  shift (push)
+   e.g.
+   $a=shift(@arry)
+   unshift(@arry,  $ok)
+  
+EE splice
+   从指定index开始删除元素
+
+EE foreach
+  e.g. foreach $_ (@array) {
+        do
+       }
+  如果省略$_ 则默认使用$_变量
+  
+EE reverse
+    返回指定数组的反转
+   e.g. @aa = reverse(@aa)
+    用于hash的效果是，对调key-value
+
+EE sort
+    返回指定数组的排序结果
+
+EE each
+    返回下一个元素的index和值
+  e.g.
+    while (my($index,  $value) = each @array)
+        do
+   
+EE 定义函数
+   sub name {
+     do
+   }
+  调用func
+     在函数名前添加&调用
+  e.g. &name
+   所有的func都有返回值, 最后一个表达式的结果就是返回值
+
+  参数，定义时不用申明参数, 调用时在后面用括号把参数阔起就像 和bash 一样
+       Perl 会把参数列表存到特殊变量@_中
+
+EE die 处理致命错误
+   现实错误，终止程序
+    e.g. die "wo ri $!"
+
+EE 自动检测致命错误，
+  use autodie;
+
+EE key value
+  分别返回hash的key 数组和value数组
+ e.g. @k = key(%hh)
+ e.g. @v = value(%hh)
+
+EE exists
+  检测hash中是否有一特定key
+  retrun bool
+  如果key有value为undef 则exists还是会返回true
+
+EE delete
+  删除一指定key-value pair
+  e.g. delete %hh{'ok'}
+
+EE %ENV
+ 运行的环境hash
+
